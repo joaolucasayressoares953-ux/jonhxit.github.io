@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Painel Xit</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background: #121212;
+        color: #f7f7f7;
+        display: flex;
+        min-height: 100vh;
+        align-items: center;
+        justify-content: center;
+      }
+      .painel-xit {
+        width: min(90vw, 760px);
+        border-radius: 16px;
+        background: linear-gradient(170deg, #1a1a1a 0%, #2f2f4b 55%, #3b3b6b 100%);
+        box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+        padding: 28px;
+      }
+      .painel-xit h1 {
+        margin: 0 0 16px;
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
+        letter-spacing: 0.03em;
+      }
+      .painel-xit p {
+        margin: 0 0 16px;
+        line-height: 1.5;
+      }
+      .status-chip {
+        display: inline-block;
+        padding: 0.45rem 0.85rem;
+        border-radius: 999px;
+        background: #32d74b;
+        color: #fff;
+        font-weight: 700;
+        font-size: 0.95rem;
+      }
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 12px;
+      }
+      .card { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); border-radius: 12px; padding: 12px; }
+      .card h3 { margin: 0 0 6px; }
+      .card small { color: #b8b8ea; }
+      .login-form {
+        background: rgba(0,0,0,.35);
+        border: 1px solid rgba(255,255,255,.2);
+        border-radius: 12px;
+        padding: 22px;
+        width: min(100%, 340px);
+        box-shadow: 0 12px 32px rgba(0,0,0,.5);
+      }
+      .login-form h2 { margin: 0 0 10px; font-size: 1.35rem; }
+      .login-form input {
+        width: 100%;
+        padding: 10px 12px;
+        margin: 8px 0;
+        border-radius: 10px;
+        border: 1px solid rgba(255,255,255,.2);
+        background: rgba(255,255,255,.08);
+        color: #fff;
+      }
+      .login-form button {
+        width: 100%;
+        padding: 10px 14px;
+        border: 0;
+        border-radius: 10px;
+        background: linear-gradient(90deg, #1e90ff, #3b8bff);
+        color: #fff;
+        font-weight: 700;
+        cursor: pointer;
+        margin-top: 12px;
+      }
+      .login-error { color: #ff6b6b; font-size: 0.95rem; margin-top: 6px; }
+      .hidden { display: none !important; }
+      .tp-bar {
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, #32d74b 0%, #42a5ff 50%, #ffd54f 100%);
+        border-radius: 999px;
+        margin-top: 25px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="painel-xit" role="main">
+      <div id="login" class="login-form" aria-live="polite">
+        <h2>Acesso ao Painel Xit</h2>
+        <p>Use o usuário e senha abaixo para acessar (Chrome e Safari compatível)</p>
+        <p style="font-size:0.95rem; color:#b8b8ea; margin-bottom:8px">Usuário: <strong>Jonh.xit</strong> | Senha: <strong>211024</strong></p>
+        <label>
+          <span class="sr-only">Usuário</span>
+          <input id="username" type="text" autocomplete="username" placeholder="Usuário" required>
+        </label>
+        <label>
+          <span class="sr-only">Senha</span>
+          <input id="password" type="password" autocomplete="current-password" placeholder="Senha" required>
+        </label>
+        <button type="button" onclick="login()">Entrar</button>
+        <div id="login-error" class="login-error hidden">Usuário ou senha inválidos. Tente novamente.</div>
+      </div>
+
+      <section id="dashboard" class="hidden" aria-live="polite">
+        <h1>Painel Xit Avançado</h1>
+        <p>Bem-vindo ao painel premium de vendas. Está acessando via Chrome/Safari com autenticação local.</p>
+        <div class="tp-bar" aria-hidden="true"></div>
+        <span class="status-chip" aria-label="Status online">Online</span>
+        <section class="card-grid" style="margin-top:20px;">
+          <article class="card"><h3>Receita</h3><p>R$ 221.430,00</p><small>Últimos 30 dias</small></article>
+          <article class="card"><h3>Conversão</h3><p>6,7%</p><small>Meta: 5,0%</small></article>
+          <article class="card"><h3>NPS</h3><p>76</p><small>Excelente</small></article>
+          <article class="card"><h3>Leads</h3><p>3.650 novos</p><small>Campanha atual</small></article>
+          <article class="card"><h3>Churn</h3><p>1,2%</p><small>Baixo</small></article>
+          <article class="card"><h3>Vel. de entrega</h3><p>9h 23m</p><small>Até 24h</small></article>
+        </section>
+
+        <section class="card-grid" style="margin-top: 18px;">
+          <article class="card"><h3>Últimas vendas</h3><p>20 pedidos fechados</p><small>Hoje</small></article>
+          <article class="card"><h3>Urgência</h3><p>2 em atraso</p><small>Ação imediata</small></article>
+          <article class="card"><h3>Notificações</h3><p>2 novas mensagens</p><small>Admin</small></article>
+        </section>
+
+        <section style="margin-top: 20px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); border-radius: 12px; padding: 14px;">
+          <h2 style="margin:0 0 10px; font-size:1.2rem;">Opções de Controle</h2>
+          <p style="margin:0 0 12px; color:#d0d4ff;">Selecione configurações avançadas de aimbot / healo ck</p>
+          <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom:8px;">
+            <span>Aimbot</span>
+            <input type="checkbox" id="optAimbot" onchange="toggleFeature('Aimbot', this.checked)">
+          </label>
+          <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom:8px;">
+            <span>Healo ck</span>
+            <input type="checkbox" id="optHealo" onchange="toggleFeature('Healo ck', this.checked)">
+          </label>
+          <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom:8px;">
+            <span>Modo furtivo</span>
+            <input type="checkbox" id="optStealth" onchange="toggleFeature('Modo furtivo', this.checked)">
+          </label>
+          <div id="featureState" style="margin-top:10px; color:#92e3ff;">Nenhuma ação recente.</div>
+        </section>
+      </section>
+    </main>
+
+    <script>
+      function login() {
+        var u = document.getElementById('username').value.trim();
+        var p = document.getElementById('password').value.trim();
+        var err = document.getElementById('login-error');
+        if (u === 'Jonh.xit' && p === '211024') {
+          document.getElementById('login').classList.add('hidden');
+          document.getElementById('dashboard').classList.remove('hidden');
+          err.classList.add('hidden');
+        } else {
+          err.classList.remove('hidden');
+        }
+      }
+      document.getElementById('password').addEventListener('keyup', function(e){
+        if (e.key === 'Enter') login();
+      });
+      document.getElementById('username').addEventListener('keyup', function(e){
+        if (e.key === 'Enter') login();
+      });
+
+      function toggleFeature(name, enabled) {
+        var status = document.getElementById('featureState');
+        status.textContent = name + (enabled ? ' ativado' : ' desativado') + '.\n';
+      }
+    </script>
+  </
