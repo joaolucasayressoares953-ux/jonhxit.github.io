@@ -8,7 +8,7 @@
       :root {
         --bg1: #0d1021;
         --bg2: #1e2145;
-        --accent: #4ec9ff;recir
+        --accent: #4ec9ff;
         --text: #e5e7ff;
         --muted: #a6accf;
       }
@@ -119,7 +119,7 @@
       <main>
         <section id="loginPanel" class="panel" aria-live="polite">
           <h2>Autenticação</h2>
-          <p class="hint">Senha local de demonstração (não use em conta real): <strong>Jonh.xit : 211024</strong></p>
+          <p class="hint">Senha local de demonstração (não use em conta real): <strong>yuri.xit : Jonh.xit</strong></p>
           <div class="form-group">
             <label for="username">Usuário</label>
             <input id="username" type="text" autocomplete="username" placeholder="Digite usuário" aria-label="Usuário">
@@ -178,7 +178,6 @@
             <div class="finger" id="finger" style="top:50%; left:50%;"></div>
           </div>
           <p class="hint" id="simState">Movimente o mouse ou toque para experimentar.</p>
-          <p class="hint" id="touchFeedback">Toque em qualquer lugar aqui para ajustar na tela.</p>
 
           <div class="footer">Versão 2.0 • Uso educacional e de interface, sem controle direto de games.</div>
         </section>
@@ -274,7 +273,7 @@
       const simRoot = document.getElementById('simulator');
 
       let lastPos = {x: 50, y: 50};
-      let lastTime = Date.now();
+      let rafId = null;
 
       function onPointerMove(event) {
         const rect = simRoot.getBoundingClientRect();
@@ -287,8 +286,8 @@
         const deltaX = x - lastPos.x;
         const deltaY = y - lastPos.y;
 
-        const speedFactor = (touch / 100) * 1.4;
-        const smoothFactor = Math.max(0.01, 1 - smooth / 100);
+        const speedFactor = (touch / 100) * 1.5;
+        const smoothFactor = Math.max(0.02, 1 - smooth / 100);
 
         lastPos.x += deltaX * speedFactor * smoothFactor;
         lastPos.y += deltaY * speedFactor * smoothFactor;
@@ -299,39 +298,18 @@
         finger.style.left = `${lastPos.x}%`;
         finger.style.top = `${lastPos.y}%`;
 
-        const now = Date.now();
-        const elapsed = (now - lastTime) / 1000;
-        lastTime = now;
-        const velocity = Math.sqrt(deltaX * deltaX + deltaY * deltaY) / Math.max(elapsed, 0.001);
-
-        document.getElementById('simState').textContent = `Posição atual: ${lastPos.x.toFixed(1)}%, ${lastPos.y.toFixed(1)}% | Velocidade: ${velocity.toFixed(1)}`;
-
-        const feedback = document.getElementById('touchFeedback');
-        if (feedback) {
-          const aim = document.getElementById('targetAim').value;
-          feedback.textContent = `Ajuste de toque real aplicado (${aim}). Toque: ${touch}, Suavização: ${smooth}`;
-        }
-      }
-
-      function onTouchMove(evt) {
-        evt.preventDefault();
-        if (!evt.touches.length) return;
-        const touchPoint = evt.touches[0];
-        onPointerMove(touchPoint);
+        document.getElementById('simState').textContent = `Posição atual: ${lastPos.x.toFixed(1)}%, ${lastPos.y.toFixed(1)}%`;
       }
 
       simRoot.addEventListener('pointermove', (e) => {
-        if (e.pointerType !== 'touch' && e.buttons === 0) return;
+        if (e.buttons === 0) return;
         onPointerMove(e);
       });
       simRoot.addEventListener('pointerdown', (e) => { simRoot.setPointerCapture(e.pointerId); onPointerMove(e); });
       simRoot.addEventListener('pointerup', (e) => { simRoot.releasePointerCapture(e.pointerId); });
-      simRoot.addEventListener('touchmove', onTouchMove, {passive: false});
-      simRoot.addEventListener('touchstart', onTouchMove, {passive: false});
 
       // Inicializa valores base
       updateLabels();
     </script>
   </body>
-</html>mkdir -p Jonh.xit && cp -r index.html Jonh.xit/mkdir -p Jonh.xit && cp -r index.html Jonh.xit/cd Jonh.xit   # se copiou pra cá; caso contrário fique na raiz
-python3 -m http.server 80002
+</html>mkdir -p Jonh.xit && cp -r index.html Jonh.xit/mkdir -p Jonh.xit && cp -r index.html Jonh.xit/
