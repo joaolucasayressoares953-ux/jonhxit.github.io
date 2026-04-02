@@ -1,1 +1,7 @@
-# jonhxit.github.io
+echo "# Jonh.xit" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/joaolucasayressoares953-ux/Jonh.xit.git
+git push -u origin main
